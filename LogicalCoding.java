@@ -187,13 +187,28 @@ public class LogicalCoding {
          return result[result.length-1]-result[0];
     }
 
+
+
     // problem 6: findMinAndMax values
 
     public void minAndMax(int[] a){
+         // we can use Arrays.sort() also
         int[] result = sortElements(a);
         if(result.length<2)
             return;
         System.out.println("Min element is:: "+result[0] + "  Max element is :: "+result[result.length-1]);
+    }
+    // solution with out sorting
+
+    public void findMinAndMax(int[] a){
+         int min=a[0];
+         int max=a[0];
+
+        for (int i:a) {
+            min = i<min ? i : min;
+            max = i>max ? i : max;
+        }
+        System.out.println("Min element is:: "+ min + "  Max element is :: "+ max);
     }
 
     // problem 7 : findMinAndMax values for any given rank
@@ -204,6 +219,73 @@ public class LogicalCoding {
             return;
         System.out.println("Min element is:: "+result[n-1] + "  Max element is :: "+result[result.length-n]);
     }
+
+    // problem 8 : finding common elements in arrays
+    // for any non-sorting and sorting arrays
+    public void commonElements(int[] a1,int[] a2,int[] a3) {
+
+         // incase if given array contains diuplicates
+        a1 = removeduplicatesFromArray(a1);
+        a2 = removeduplicatesFromArray(a2);
+        a3 = removeduplicatesFromArray(a3);
+        for (int i: a1) {
+            if(isContain(a2,i) && isContain(a3,i)){
+                System.out.println(i);
+            }
+        }
+    }
+
+    // for sorting arrays
+    public void commonElementsForSorted(int[] a1,int[] a2,int[] a3){
+         int i=0,j=0,k = 0;
+
+         while(i<a1.length && j<a2.length && k <a3.length){
+
+             if(a1[i]==a2[j] && a2[j]==a3[k]){
+                 System.out.println(a1[i]);
+                 i++;
+                 k++;
+                 j++;
+             }
+             else if(a1[i]<a2[j]){
+                 i++;
+             }
+             else if(a2[j]<a3[k]){
+                 j++;
+             }
+             else {
+                 k++;
+             }
+
+         }
+    }
+
+    // problem 9 : finding element pairs in given array whose sum is equal to given number
+
+    public void elementPairsForSum(int[] a, int sum){
+         for(int i = 0;i<a.length;i++){
+             for(int j=i+1;j<a.length;j++){
+                if(a[i]+a[j] == sum)
+                    System.out.println("pair is : : " + a[i] + " : " + a[j]);
+             }
+         }
+    }
+
+    // problem 10: finding smallest pair sum in given array
+
+    public void smallestPair(int[] a){
+         if(a.length <2)
+             return;
+         int minSum = a[0]+a[1];
+        for(int i = 0;i<a.length;i++){
+            for(int j=i+1;j<a.length;j++){
+                if(a[i]+a[j]<minSum)
+                    minSum = a[i]+a[j];
+            }
+        }
+        System.out.println("The smallest total of two elements is : : " + minSum);
+    }
+
 
 
 
